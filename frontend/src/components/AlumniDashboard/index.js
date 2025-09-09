@@ -77,7 +77,7 @@ class AlumniDashboard extends Component {
                   <span className="company">{job.company}</span>
                 </div>
                 <div className="job-card-body">
-                  <p className="location">📍 ,,,,,,,,,,, {job.location}</p>
+                  <p className="location">📍{job.location}</p>
                   <p className="stipend">💰 {job.stipend}</p>
 
                 </div>
