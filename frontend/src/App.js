@@ -58,7 +58,7 @@ class App extends React.Component {
           {isAuthenticated && (
             <>
               <Header user={user} onLogout={this.handleLogout} />
-              <div className="main-container">
+              <div className={`main-container ${user?.role === 'alumni' ? 'has-sidebar' : ''}`}>
                 {user?.role === 'alumni' && (
                   <Sidebar userRole={user?.role} />
                 )}

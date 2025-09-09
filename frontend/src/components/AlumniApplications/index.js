@@ -3,7 +3,7 @@ import { jobService } from '../../services/api';
 import history from '../../utils/history';
 import './index.css';
 
-class AlumniDashboard extends Component {
+class AlumniApplications extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,47 +35,22 @@ class AlumniDashboard extends Component {
     }
   }
 
-  deleteJob = async (jobId) => {
-    if (!window.confirm('Are you sure you want to delete this job?')) return;
-    try {
-      await jobService.deleteJob(jobId);
-      this.setState(prev => ({ jobs: prev.jobs.filter(j => j.id !== jobId) }));
-    } catch (error) {
-      this.setState({ error: 'Error deleting job. Please try again.' });
-    }
-  }
-
   render() {
     const { jobs, isLoading, error } = this.state;
-    const { user } = this.props;
 
     if (isLoading) {
-      return <div className="loading-spinner"></div>;
+      return <div className="loading-spinner">Loading...</div>;
     }
 
     return (
-      <div className="alumni-dashboard">
-        <div className="dashboard-header">
-          <h1>Welcome, {user.name}!</h1>
-          <button
-            className="post-job-button"
-            onClick={() => history.push('/alumni/post-job')}
-          >
-            Post New Job
-          </button>
+      <div className="alumni-applications">
+        <div className="applications-header">
+          <h1>All Applications</h1>
+          <p>View applications for all your job postings</p>
         </div>
 
         {error && <div className="error-message">{error}</div>}
 
-        <div className="dashboard-stats">
-          <div className="stat-card">
-            <h3>Active Jobs</h3>
-            <p className="stat-number">{jobs.length}</p>
-          </div>
-          {/* Add more stat cards as needed */}
-        </div>
-
-        <h2 className="section-title">Your Job Postings</h2>
         <div className="jobs-grid">
           {jobs.length === 0 ? (
             <p className="no-jobs">You haven't posted any jobs yet.</p>
@@ -96,19 +71,7 @@ class AlumniDashboard extends Component {
                     className="view-applications-button"
                     onClick={() => history.push(`/alumni/jobs/${job.id}/applications`)}
                   >
-                    View Applications
-                  </button>
-                  <button
-                    className="edit-button"
-                    onClick={() => history.push(`/alumni/jobs/${job.id}/edit`)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="delete-button"
-                    onClick={() => this.deleteJob(job.id)}
-                  >
-                    Delete
+                    View Applications ({job.applications_count})
                   </button>
                 </div>
               </div>
@@ -120,4 +83,4 @@ class AlumniDashboard extends Component {
   }
 }
 
-export default AlumniDashboard;
+export default AlumniApplications;

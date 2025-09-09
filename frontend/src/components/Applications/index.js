@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { applicationService } from '../../services/api';
+import { applicationService, BACKEND_URL } from '../../services/api';
 import './index.css';
 import history from '../../utils/history';
 
@@ -90,7 +90,7 @@ class Applications extends Component {
                   <div className="resume-section">
                     <span className="label">Resume:</span>
                     <a 
-                      href={application.resume_url}
+                      href={`${BACKEND_URL}${application.resume_url || ''}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="resume-link"

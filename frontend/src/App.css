@@ -23,7 +23,7 @@ body {
 .main-container {
   display: flex;
   flex: 1;
-  padding-top: 64px; /* reserve space for fixed header */
+  padding-top: 80px; /* reserve space for fixed header */
 }
 
 .content {
@@ -33,16 +33,14 @@ body {
   max-width: 100%;
 }
 
-/* Offset content when alumni sidebar is visible (240px) */
+/* Default content positioning */
 .main-container .content {
   margin-left: 0;
 }
 
 /* When alumni sidebar exists, offset content */
-@media (min-width: 769px) {
-  .main-container .content {
-    margin-left: 240px;
-  }
+.main-container.has-sidebar .content {
+  margin-left: 240px;
 }
 
 @media (max-width: 768px) {

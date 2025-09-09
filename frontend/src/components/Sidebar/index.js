@@ -29,7 +29,7 @@ class Sidebar extends Component {
               </NavLink>
 
               <NavLink 
-                to={`${baseRoute}/jobs`}
+                to={`${baseRoute}/applications`}
                 className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
               >
                 <span className="nav-icon">📁</span>

@@ -5,6 +5,8 @@ import Register from '../components/Register';
 import AlumniDashboard from '../components/AlumniDashboard';
 import StudentDashboard from '../components/StudentDashboard';
 import PostJob from '../components/PostJob';
+import EditJob from '../components/EditJob';
+import AlumniApplications from '../components/AlumniApplications';
 import JobDetails from '../components/JobDetails';
 import Applications from '../components/Applications';
 import ApplyJob from '../components/ApplyJob';
@@ -38,6 +40,8 @@ class AppRoutes extends React.Component {
           <>
             <Route path="/alumni/dashboard" element={<AlumniDashboard user={user} />} />
             <Route path="/alumni/post-job" element={<PostJob />} />
+            <Route path="/alumni/applications" element={<AlumniApplications user={user} />} />
+            <Route path="/alumni/jobs/:jobId/edit" element={<EditJob />} />
             <Route path="/alumni/jobs/:jobId/applications" element={<Applications />} />
             <Route path="/" element={<Navigate to="/alumni/dashboard" replace />} />
           </>

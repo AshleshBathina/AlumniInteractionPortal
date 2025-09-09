@@ -3,9 +3,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #FFFFFF;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 64px;
+  background: #1E88E533;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(31, 78, 140, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+  height: 80px;
   position: fixed;
   top: 0;
   left: 0;
@@ -16,6 +19,28 @@
 .header-left {
   display: flex;
   align-items: center;
+  gap: 1rem;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-placeholder {
+  background: linear-gradient(135deg, #FFA726, #FF8A65);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 8px rgba(255, 167, 38, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo-text {
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .header-right {
@@ -28,24 +53,30 @@
 .applications-container { position: relative; }
 .applications-button {
   padding: 0.5rem 1rem;
-  background-color: #F7F7F7;
-  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: #333333;
+  color: #FFFFFF;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
-.applications-button:hover { background-color: #E0E0E0; }
+.applications-button:hover { 
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
 .applications-button .badge {
   margin-left: 8px;
-  background-color: #1F4E8C;
+  background-color: #FFA726;
   color: #FFFFFF;
   border-radius: 999px;
   padding: 2px 8px;
   font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(255, 167, 38, 0.3);
 }
 .applications-dropdown {
   position: absolute;
@@ -107,11 +138,44 @@
 }
 
 .notification-button {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
   cursor: pointer;
   padding: 0.5rem;
   position: relative;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.notification-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #FFA726;
+  color: #FFFFFF;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(255, 167, 38, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 .notification-icon {
@@ -124,19 +188,123 @@
   top: 100%;
   right: 0;
   background-color: #FFFFFF;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  width: 350px;
+  max-height: 400px;
+  overflow-y: auto;
   z-index: 1000;
   margin-top: 0.5rem;
   animation: fadeIn 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transform: translateX(0);
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #F7F7F7;
+  background-color: #F8F9FA;
+  border-radius: 12px 12px 0 0;
+}
+
+.notification-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.mark-all-read-button {
+  background: none;
+  border: none;
+  color: #1F4E8C;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.mark-all-read-button:hover {
+  background-color: rgba(31, 78, 140, 0.1);
 }
 
 .notification-item {
   padding: 1rem;
   border-bottom: 1px solid #F7F7F7;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.notification-item:hover {
+  background-color: #F8F9FA;
+}
+
+.notification-item.unread {
+  background-color: #E3F2FD;
+  border-left: 3px solid #1F4E8C;
+}
+
+.notification-item.read {
+  opacity: 0.7;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-message {
+  margin: 0 0 0.25rem 0;
   font-size: 14px;
+  color: #333333;
+  line-height: 1.4;
+}
+
+.notification-time {
+  font-size: 12px;
   color: #777777;
+}
+
+.delete-notification-button {
+  background: none;
+  border: none;
+  color: #999999;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-notification-button:hover {
+  background-color: #FFEBEE;
+  color: #E57373;
+}
+
+.notification-loading,
+.notification-empty,
+.notification-error {
+  padding: 1rem;
+  text-align: center;
+  color: #777777;
+  font-size: 14px;
+}
+
+.notification-error {
+  color: #E57373;
 }
 
 .profile-container {
@@ -146,41 +314,46 @@
 }
 
 .profile-circle {
-  width: 36px;
-  height: 36px;
-  background-color: #BBDEFB;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #FFA726, #FF8A65);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Inter', sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   color: #FFFFFF;
   font-size: 16px;
+  box-shadow: 0 4px 8px rgba(255, 167, 38, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .user-name {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  font-weight: 500;
-  color: #333333;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .logout-button {
   padding: 0.5rem 1rem;
-  background-color: #1F4E8C;
-  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: #FFFFFF;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .logout-button:hover {
-  background-color: #0D3C61;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
 
 @keyframes fadeIn {
@@ -191,5 +364,16 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .notification-dropdown {
+    width: 300px;
+    right: -50px;
+  }
+  
+  .applications-dropdown {
+    width: 280px;
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { applicationService } from '../../services/api';
+import { applicationService, notificationService } from '../../services/api';
 import './index.css';
 
 class Header extends Component {
@@ -10,14 +10,25 @@ class Header extends Component {
       isApplicationsDropdownOpen: false,
       myApplications: [],
       isLoadingApplications: false,
-      appsError: null
+      appsError: null,
+      notifications: [],
+      unreadCount: 0,
+      isLoadingNotifications: false,
+      notificationsError: null
     };
   }
 
   toggleNotificationDropdown = () => {
-    this.setState(prevState => ({
-      isNotificationDropdownOpen: !prevState.isNotificationDropdownOpen
-    }));
+    this.setState(prevState => {
+      const isOpening = !prevState.isNotificationDropdownOpen;
+      if (isOpening) {
+        // Fetch notifications when opening the dropdown
+        this.fetchNotifications();
+      }
+      return {
+        isNotificationDropdownOpen: isOpening
+      };
+    });
   }
 
   toggleApplicationsDropdown = () => {
@@ -31,6 +42,19 @@ class Header extends Component {
     if (user?.role === 'student') {
       this.fetchMyApplications();
     }
+    // Only fetch unread count on mount, fetch full notifications when dropdown opens
+    this.fetchUnreadCount();
+    
+    // Set up polling for notifications
+    this.notificationInterval = setInterval(() => {
+      this.fetchUnreadCount();
+    }, 30000); // Check every 30 seconds
+  }
+
+  componentWillUnmount() {
+    if (this.notificationInterval) {
+      clearInterval(this.notificationInterval);
+    }
   }
 
   fetchMyApplications = async () => {
@@ -43,6 +67,93 @@ class Header extends Component {
     }
   }
 
+  fetchNotifications = async () => {
+    const { user } = this.props;
+    if (!user) {
+      console.log('No user found, skipping notifications fetch');
+      return;
+    }
+    
+    // Check if user is authenticated
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log('No auth token found');
+      this.setState({ notificationsError: 'Please log in to view notifications', isLoadingNotifications: false });
+      return;
+    }
+    
+    this.setState({ isLoadingNotifications: true, notificationsError: null });
+    try {
+      console.log('Fetching notifications for user:', user.id);
+      const response = await notificationService.getNotifications();
+      console.log('Notifications response:', response);
+      this.setState({ notifications: response.data || [], isLoadingNotifications: false });
+    } catch (e) {
+      console.error('Error fetching notifications:', e);
+      const errorMessage = e.response?.data?.error || 'Failed to load notifications';
+      this.setState({ notificationsError: errorMessage, isLoadingNotifications: false });
+    }
+  }
+
+  fetchUnreadCount = async () => {
+    const { user } = this.props;
+    if (!user) {
+      return;
+    }
+    
+    try {
+      console.log('=== FRONTEND: Fetching unread count ===');
+      console.log('User:', user);
+      const token = localStorage.getItem('token');
+      console.log('Token exists:', !!token);
+      
+      const response = await notificationService.getUnreadCount();
+      console.log('Unread count response:', response);
+      this.setState({ unreadCount: response.data.count || 0 });
+    } catch (e) {
+      console.error('Failed to fetch unread count:', e);
+      console.error('Error details:', e.response?.data);
+    }
+  }
+
+  markNotificationAsRead = async (notificationId) => {
+    try {
+      await notificationService.markAsRead(notificationId);
+      this.setState(prevState => ({
+        notifications: prevState.notifications.map(notif =>
+          notif.id === notificationId ? { ...notif, read: 1 } : notif
+        ),
+        unreadCount: Math.max(0, prevState.unreadCount - 1)
+      }));
+    } catch (e) {
+      console.error('Failed to mark notification as read:', e);
+    }
+  }
+
+  markAllAsRead = async () => {
+    try {
+      await notificationService.markAllAsRead();
+      this.setState(prevState => ({
+        notifications: prevState.notifications.map(notif => ({ ...notif, read: 1 })),
+        unreadCount: 0
+      }));
+    } catch (e) {
+      console.error('Failed to mark all notifications as read:', e);
+    }
+  }
+
+  deleteNotification = async (notificationId) => {
+    try {
+      await notificationService.deleteNotification(notificationId);
+      this.setState(prevState => ({
+        notifications: prevState.notifications.filter(notif => notif.id !== notificationId),
+        unreadCount: Math.max(0, prevState.unreadCount - 1)
+      }));
+    } catch (e) {
+      console.error('Failed to delete notification:', e);
+    }
+  }
+
   getProfileInitial = () => {
     const { user } = this.props;
     return user?.name?.charAt(0).toUpperCase() || 'U';
@@ -50,11 +161,26 @@ class Header extends Component {
 
   render() {
     const { user, onLogout } = this.props;
-    const { isNotificationDropdownOpen, isApplicationsDropdownOpen, myApplications, isLoadingApplications, appsError } = this.state;
+    const { 
+      isNotificationDropdownOpen, 
+      isApplicationsDropdownOpen, 
+      myApplications, 
+      isLoadingApplications, 
+      appsError,
+      notifications,
+      unreadCount,
+      isLoadingNotifications,
+      notificationsError
+    } = this.state;
 
     return (
       <header className="header">
         <div className="header-left">
+          <div className="logo-container">
+            <div className="logo-placeholder">
+              <span className="logo-text">AlumniHub</span>
+            </div>
+          </div>
           {user?.role === 'student' && (
             <div className="applications-container">
               <button 
@@ -95,14 +221,60 @@ class Header extends Component {
               className="notification-button"
               onClick={this.toggleNotificationDropdown}
             >
-              
+              🔔
+              {unreadCount > 0 && (
+                <span className="notification-badge">{unreadCount}</span>
+              )}
             </button>
             {isNotificationDropdownOpen && (
               <div className="notification-dropdown">
-                {/* Notification items will go here */}
-                <div className="notification-item">
-                  No new notifications
+                <div className="notification-header">
+                  <h3>Notifications</h3>
+                  {notifications.length > 0 && (
+                    <button 
+                      className="mark-all-read-button"
+                      onClick={this.markAllAsRead}
+                    >
+                      Mark all read
+                    </button>
+                  )}
                 </div>
+                
+                {isLoadingNotifications && (
+                  <div className="notification-loading">Loading...</div>
+                )}
+                
+                {notificationsError && (
+                  <div className="notification-error">{notificationsError}</div>
+                )}
+                
+                {!isLoadingNotifications && !notificationsError && notifications.length === 0 && (
+                  <div className="notification-empty">No notifications yet</div>
+                )}
+                
+                {!isLoadingNotifications && !notificationsError && notifications.map(notification => (
+                  <div 
+                    key={notification.id} 
+                    className={`notification-item ${notification.read ? 'read' : 'unread'}`}
+                    onClick={() => !notification.read && this.markNotificationAsRead(notification.id)}
+                  >
+                    <div className="notification-content">
+                      <p className="notification-message">{notification.message}</p>
+                      <span className="notification-time">
+                        {new Date(notification.created_at).toLocaleString()}
+                      </span>
+                    </div>
+                    <button 
+                      className="delete-notification-button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        this.deleteNotification(notification.id);
+                      }}
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
               </div>
             )}
           </div>

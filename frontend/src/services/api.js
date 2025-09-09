@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api';
+export const BACKEND_URL = 'http://localhost:5000';
 
 // Create axios instance with baseURL
 const api = axios.create({
@@ -96,11 +97,25 @@ export const userService = {
   markNotificationAsRead: (id) => api.put(`/users/notifications/${id}/read`)
 };
 
+// Notifications Services
+export const notificationService = {
+  getNotifications: () => api.get('/notifications'),
+  
+  getUnreadCount: () => api.get('/notifications/unread-count'),
+  
+  markAsRead: (id) => api.put(`/notifications/${id}/read`),
+  
+  markAllAsRead: () => api.put('/notifications/mark-all-read'),
+  
+  deleteNotification: (id) => api.delete(`/notifications/${id}`)
+};
+
 const apiServices = {
   authService,
   jobService,
   applicationService,
-  userService
+  userService,
+  notificationService
 };
 
 export default apiServices;

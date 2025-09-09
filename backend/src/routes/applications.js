@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const router = express.Router();
 const fs = require('fs');
+const { createNotification } = require('./notifications');
 
 // Configure multer for file upload
 const storage = multer.diskStorage({
