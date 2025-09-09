@@ -103,6 +103,28 @@
   text-decoration: underline;
 }
 
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #ffcdd2;
+}
+
+.success-message {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #c8e6c9;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;

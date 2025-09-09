@@ -11,6 +11,7 @@ import JobDetails from '../components/JobDetails';
 import Applications from '../components/Applications';
 import ApplyJob from '../components/ApplyJob';
 import Profile from '../components/Profile';
+import Notifications from '../components/Notifications';
 
 class AppRoutes extends React.Component {
   render() {
@@ -54,6 +55,7 @@ class AppRoutes extends React.Component {
           </>
         )}
         <Route path="/profile" element={<Profile user={user} />} />
+        <Route path="/notifications" element={<Notifications />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     );

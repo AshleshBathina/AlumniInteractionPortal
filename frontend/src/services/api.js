@@ -38,10 +38,7 @@ export const authService = {
 
   register: async (userData) => {
     const response = await api.post('/auth/register', userData);
-    if (response.data.token) {
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-    }
+    // Registration no longer returns a token, just success message
     return response.data;
   },
 

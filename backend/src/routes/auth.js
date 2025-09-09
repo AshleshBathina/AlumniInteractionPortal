@@ -31,14 +31,16 @@ router.post('/register', async (req, res) => {
           return res.status(500).json({ error: 'Error creating user' });
         }
 
-        // Create JWT token
-        const token = jwt.sign(
-          { id: this.lastID, role },
-          'your_jwt_secret',
-          { expiresIn: '24h' }
-        );
-
-        res.json({ token });
+        // Return success message without token
+        res.json({ 
+          message: 'User registered successfully',
+          user: {
+            id: this.lastID,
+            name,
+            email,
+            role
+          }
+        });
       });
     });
   } catch (error) {
