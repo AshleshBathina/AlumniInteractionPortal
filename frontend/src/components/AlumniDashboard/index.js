@@ -28,9 +28,9 @@ class AlumniDashboard extends Component {
         }));
       this.setState({ jobs, isLoading: false });
     } catch (error) {
-      this.setState({ 
+      this.setState({
         error: 'Error fetching jobs. Please try again later.',
-        isLoading: false 
+        isLoading: false
       });
     }
   }
@@ -47,7 +47,7 @@ class AlumniDashboard extends Component {
       <div className="alumni-dashboard">
         <div className="dashboard-header">
           <h1>Welcome, {user.name}!</h1>
-          <button 
+          <button
             className="post-job-button"
             onClick={() => history.push('/alumni/post-job')}
           >
@@ -77,18 +77,18 @@ class AlumniDashboard extends Component {
                   <span className="company">{job.company}</span>
                 </div>
                 <div className="job-card-body">
-                  <p className="location">📍 {job.location}</p>
+                  <p className="location">📍 ,,,,,,,,,,, {job.location}</p>
                   <p className="stipend">💰 {job.stipend}</p>
-                  
+
                 </div>
                 <div className="job-card-footer">
-                  <button 
+                  <button
                     className="view-applications-button"
                     onClick={() => history.push(`/alumni/jobs/${job.id}/applications`)}
                   >
                     View Applications
                   </button>
-                  
+
                 </div>
               </div>
             ))
