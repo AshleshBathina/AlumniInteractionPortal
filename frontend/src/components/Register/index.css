@@ -1,0 +1,117 @@
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1F4E8C 0%, #4DB6AC 100%);
+  padding: 2rem;
+}
+
+.register-card {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.5s ease;
+}
+
+.register-title {
+  color: #333333;
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.form-input,
+.form-select {
+  padding: 0.75rem 1rem;
+  border: 1px solid #F7F7F7;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #333333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #4DB6AC;
+  box-shadow: 0 0 0 3px rgba(77, 182, 172, 0.1);
+}
+
+.register-button {
+  padding: 0.75rem;
+  background-color: #1F4E8C;
+  border: none;
+  border-radius: 8px;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.register-button:hover {
+  background-color: #0D3C61;
+}
+
+.register-button.loading {
+  background-color: #4DB6AC;
+  cursor: not-allowed;
+}
+
+.auth-switch {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #777777;
+}
+
+.auth-switch a {
+  color: #1F4E8C;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+

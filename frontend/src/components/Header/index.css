@@ -1,0 +1,195 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 64px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Applications quick view (student) */
+.applications-container { position: relative; }
+.applications-button {
+  padding: 0.5rem 1rem;
+  background-color: #F7F7F7;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.applications-button:hover { background-color: #E0E0E0; }
+.applications-button .badge {
+  margin-left: 8px;
+  background-color: #1F4E8C;
+  color: #FFFFFF;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+.applications-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  z-index: 1000;
+  margin-top: 0.5rem;
+  animation: fadeIn 0.2s ease;
+  max-height: 320px;
+  overflow: auto;
+}
+.application-item { display: flex; justify-content: space-between; padding: 0.75rem 1rem; border-bottom: 1px solid #F7F7F7; }
+.application-title { font-size: 14px; color: #333333; margin-right: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.application-status { font-size: 12px; text-transform: capitalize; padding: 2px 8px; border-radius: 999px; }
+.application-status.pending { background-color: #FFF3E0; color: #FB8C00; }
+.application-status.shortlisted { background-color: #E3F2FD; color: #1E88E5; }
+.application-status.rejected { background-color: #FFEBEE; color: #E53935; }
+.application-status.accepted { background-color: #E8F5E9; color: #43A047; }
+.applications-loading, .applications-empty, .applications-error { padding: 0.75rem 1rem; font-size: 14px; color: #777777; }
+
+.search-input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #F7F7F7;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  width: 300px;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4DB6AC;
+}
+
+.filter-button {
+  padding: 0.5rem 1rem;
+  background-color: #F7F7F7;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+  background-color: #E0E0E0;
+}
+
+.notifications-container {
+  position: relative;
+}
+
+.notification-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.notification-icon {
+  font-size: 20px;
+  color: #777777;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  z-index: 1000;
+  margin-top: 0.5rem;
+  animation: fadeIn 0.2s ease;
+}
+
+.notification-item {
+  padding: 1rem;
+  border-bottom: 1px solid #F7F7F7;
+  font-size: 14px;
+  color: #777777;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.profile-circle {
+  width: 36px;
+  height: 36px;
+  background-color: #BBDEFB;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+.user-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  background-color: #1F4E8C;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #0D3C61;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

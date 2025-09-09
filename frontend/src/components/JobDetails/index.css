@@ -1,0 +1,223 @@
+.job-details {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease;
+}
+
+.job-header {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  animation: slideIn 0.5s ease;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.job-header h1 {
+  color: #333333;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.company {
+  color: #4DB6AC;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  color: #777777;
+  font-size: 14px;
+}
+
+.apply-button {
+  padding: 1rem 2rem;
+  background-color: #1F4E8C;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 2rem;
+  min-width: 150px;
+  text-align: center;
+}
+
+.apply-button:hover:not(.disabled) {
+  background-color: #0D3C61;
+  transform: translateY(-2px);
+}
+
+.apply-button.disabled {
+  background-color: #E0E0E0;
+  cursor: not-allowed;
+}
+
+.content-sections {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.main-content,
+.side-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.job-description {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.job-description h2 {
+  color: #333333;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.description-content {
+  color: #333333;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.description-content p {
+  margin-bottom: 1rem;
+}
+
+.alumni-info {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.alumni-info h3 {
+  color: #333333;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.alumni-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-circle {
+  width: 48px;
+  height: 48px;
+  background-color: #BBDEFB;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: white;
+  font-size: 20px;
+}
+
+.alumni-details {
+  flex: 1;
+}
+
+.alumni-name {
+  color: #333333;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.posted-date {
+  color: #777777;
+  font-size: 14px;
+}
+
+.deadline-notice {
+  background-color: #FFF3E0;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.warning-icon {
+  font-size: 20px;
+}
+
+.deadline-notice p {
+  color: #F57C00;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .job-details {
+    padding: 1rem;
+  }
+
+  .job-header {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .apply-button {
+    margin: 1rem 0 0 0;
+    width: 100%;
+  }
+
+  .content-sections {
+    grid-template-columns: 1fr;
+  }
+
+  .job-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
