@@ -105,6 +105,7 @@ class StudentDashboard extends Component {
 
     return (
       <div className="student-dashboard">
+        <h2 style={{ marginTop: 0, marginBottom: '12px', color: '#0D3C61' }}>Student Dashboard</h2>
         <div className="dashboard-header">
           <h1>Browse Opportunities</h1>
           <div className="search-filters">
@@ -153,27 +154,23 @@ class StudentDashboard extends Component {
                   <span className="company">{job.company}</span>
                 </div>
                 <div className="job-card-body">
-                  <p className="location">📍 {job.location}</p>
-                  <p className="stipend">💰 {job.stipend}</p>
-                  <p className="posted-by">
-                    Posted by: {job.alumni_name}
-                  </p>
-                  <p className="apply-by">
-                    Apply by: {new Date(job.apply_by).toLocaleDateString()}
-                  </p>
+                  <p className="location"><i className="fas fa-map-marker-alt"></i>{job.location}</p>
+                  <p className="stipend"><i className="fas fa-wallet"></i>{job.stipend}</p>
+                  <p className="posted-by"><i className="fas fa-user"></i>Posted by: {job.alumni_name}</p>
+                  <p className="apply-by"><i className="fas fa-calendar-alt"></i>Apply by: {new Date(job.apply_by).toLocaleDateString()}</p>
                 </div>
                 <div className="job-card-footer">
                   <button 
                     className="view-details-button"
                     onClick={() => history.push(`/student/jobs/${job.id}`)}
                   >
-                    View Details
+                    <i className="fas fa-eye"></i>View Details
                   </button>
                   <button 
                     className="apply-button"
                     onClick={() => history.push(`/student/jobs/${job.id}/apply`)}
                   >
-                    Apply Now
+                    <i className="fas fa-paper-plane"></i>Apply Now
                   </button>
                 </div>
               </div>

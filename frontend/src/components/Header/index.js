@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { applicationService, notificationService } from '../../services/api';
 import './index.css';
+import '@fortawesome/fontawesome-free/css/all.min.css'; // If using npm
 
 class Header extends Component {
   constructor(props) {
@@ -22,7 +23,6 @@ class Header extends Component {
     this.setState(prevState => {
       const isOpening = !prevState.isNotificationDropdownOpen;
       if (isOpening) {
-        // Fetch notifications when opening the dropdown
         this.fetchNotifications();
       }
       return {
@@ -42,13 +42,10 @@ class Header extends Component {
     if (user?.role === 'student') {
       this.fetchMyApplications();
     }
-    // Only fetch unread count on mount, fetch full notifications when dropdown opens
     this.fetchUnreadCount();
-    
-    // Set up polling for notifications
     this.notificationInterval = setInterval(() => {
       this.fetchUnreadCount();
-    }, 30000); // Check every 30 seconds
+    }, 30000);
   }
 
   componentWillUnmount() {
@@ -73,23 +70,17 @@ class Header extends Component {
       console.log('No user found, skipping notifications fetch');
       return;
     }
-    
-    // Check if user is authenticated
     const token = localStorage.getItem('token');
     if (!token) {
       console.log('No auth token found');
       this.setState({ notificationsError: 'Please log in to view notifications', isLoadingNotifications: false });
       return;
     }
-    
     this.setState({ isLoadingNotifications: true, notificationsError: null });
     try {
-      console.log('Fetching notifications for user:', user.id);
       const response = await notificationService.getNotifications();
-      console.log('Notifications response:', response);
       this.setState({ notifications: response.data || [], isLoadingNotifications: false });
     } catch (e) {
-      console.error('Error fetching notifications:', e);
       const errorMessage = e.response?.data?.error || 'Failed to load notifications';
       this.setState({ notificationsError: errorMessage, isLoadingNotifications: false });
     }
@@ -100,19 +91,12 @@ class Header extends Component {
     if (!user) {
       return;
     }
-    
     try {
-      console.log('=== FRONTEND: Fetching unread count ===');
-      console.log('User:', user);
       const token = localStorage.getItem('token');
-      console.log('Token exists:', !!token);
-      
       const response = await notificationService.getUnreadCount();
-      console.log('Unread count response:', response);
       this.setState({ unreadCount: response.data.count || 0 });
     } catch (e) {
       console.error('Failed to fetch unread count:', e);
-      console.error('Error details:', e.response?.data);
     }
   }
 
@@ -160,12 +144,12 @@ class Header extends Component {
   }
 
   render() {
-    const { user, onLogout } = this.props;
-    const { 
-      isNotificationDropdownOpen, 
-      isApplicationsDropdownOpen, 
-      myApplications, 
-      isLoadingApplications, 
+    const { user, onLogout, onToggleSidebar, isSidebarOpen } = this.props;
+    const {
+      isNotificationDropdownOpen,
+      isApplicationsDropdownOpen,
+      myApplications,
+      isLoadingApplications,
       appsError,
       notifications,
       unreadCount,
@@ -176,6 +160,11 @@ class Header extends Component {
     return (
       <header className="header">
         <div className="header-left">
+          {user?.role === 'alumni' && (
+            <button className="sidebar-toggle" onClick={onToggleSidebar} aria-label="Toggle sidebar">
+              <i className="fas fa-bars"></i>
+            </button>
+          )}
           <div className="logo-container">
             <div className="logo-placeholder">
               <span className="logo-text">AlumniHub</span>
@@ -183,11 +172,8 @@ class Header extends Component {
           </div>
           {user?.role === 'student' && (
             <div className="applications-container">
-              <button 
-                className="applications-button"
-                onClick={this.toggleApplicationsDropdown}
-              >
-                My Applications
+              <button className="applications-button" onClick={this.toggleApplicationsDropdown}>
+                <i className="fas fa-briefcase"></i> My Applications
                 {myApplications && myApplications.length > 0 && (
                   <span className="badge">{myApplications.length}</span>
                 )}
@@ -217,11 +203,8 @@ class Header extends Component {
 
         <div className="header-right">
           <div className="notifications-container">
-            <button 
-              className="notification-button"
-              onClick={this.toggleNotificationDropdown}
-            >
-              🔔
+            <button className="notification-button" onClick={this.toggleNotificationDropdown}>
+              <i className="fas fa-bell"></i>
               {unreadCount > 0 && (
                 <span className="notification-badge">{unreadCount}</span>
               )}
@@ -231,47 +214,48 @@ class Header extends Component {
                 <div className="notification-header">
                   <h3>Notifications</h3>
                   {notifications.length > 0 && (
-                    <button 
-                      className="mark-all-read-button"
-                      onClick={this.markAllAsRead}
-                    >
+                    <button className="mark-all-read-button" onClick={this.markAllAsRead}>
                       Mark all read
                     </button>
                   )}
                 </div>
-                
                 {isLoadingNotifications && (
                   <div className="notification-loading">Loading...</div>
                 )}
-                
                 {notificationsError && (
                   <div className="notification-error">{notificationsError}</div>
                 )}
-                
                 {!isLoadingNotifications && !notificationsError && notifications.length === 0 && (
                   <div className="notification-empty">No notifications yet</div>
                 )}
-                
                 {!isLoadingNotifications && !notificationsError && notifications.map(notification => (
-                  <div 
-                    key={notification.id} 
+                  <div
+                    key={notification.id}
                     className={`notification-item ${notification.read ? 'read' : 'unread'}`}
                     onClick={() => !notification.read && this.markNotificationAsRead(notification.id)}
                   >
                     <div className="notification-content">
                       <p className="notification-message">{notification.message}</p>
                       <span className="notification-time">
-                        {new Date(notification.created_at).toLocaleString()}
+                        {(() => {
+                          const iso = (notification.created_at || '').replace(' ', 'T') + 'Z';
+                          const dt = new Date(iso);
+                          return new Intl.DateTimeFormat('en-IN', {
+                            year: 'numeric', month: 'short', day: '2-digit',
+                            hour: '2-digit', minute: '2-digit', second: '2-digit',
+                            hour12: true, timeZone: 'Asia/Kolkata'
+                          }).format(dt);
+                        })()}
                       </span>
                     </div>
-                    <button 
+                    <button
                       className="delete-notification-button"
                       onClick={(e) => {
                         e.stopPropagation();
                         this.deleteNotification(notification.id);
                       }}
                     >
-                      ×
+                      <i className="fas fa-times"></i>
                     </button>
                   </div>
                 ))}
@@ -287,7 +271,8 @@ class Header extends Component {
           </div>
 
           <button className="logout-button" onClick={onLogout}>
-            Logout
+            <span className="logout-text">Logout</span>
+            <span className="logout-icon"><i className="fas fa-sign-out-alt"></i></span>
           </button>
         </div>
       </header>

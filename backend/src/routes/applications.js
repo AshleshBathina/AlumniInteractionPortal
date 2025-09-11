@@ -78,18 +78,27 @@ router.post('/:jobId', auth, upload.single('resume'), (req, res) => {
           return res.status(500).json({ error: 'Error creating application' });
         }
 
-        // Create notification for alumni
-        db.get('SELECT alumni_id FROM jobs WHERE id = ?', [jobId], (err, job) => {
-          if (!err && job) {
+        // Create notification for alumni including student name
+        db.get('SELECT alumni_id, title FROM jobs WHERE id = ?', [jobId], (jobErr, jobRow) => {
+          if (jobErr || !jobRow) {
+            return; // Silent fail for notification creation
+          }
+
+          db.get('SELECT name FROM users WHERE id = ?', [req.user.id], (userErr, userRow) => {
+            const studentName = userErr || !userRow ? 'A student' : userRow.name;
+            const jobTitle = jobRow.title || 'your job posting';
+
             const notificationQuery = `
               INSERT INTO notifications (user_id, message)
               VALUES (?, ?)
             `;
-            db.run(notificationQuery, [
-              job.alumni_id,
-              `New application received for your job posting`
-            ]);
-          }
+            const message = `${studentName} applied for your posting: ${jobTitle}`;
+            db.run(notificationQuery, [jobRow.alumni_id, message]);
+
+            // Also notify the student that their application was submitted
+            const studentMessage = `Your application for ${jobTitle} has been submitted`;
+            db.run(notificationQuery, [req.user.id, studentMessage]);
+          });
         });
 
         res.json({ id: this.lastID });

@@ -43,6 +43,13 @@ body {
   margin-left: 240px;
 }
 
+/* Mobile and Tablet Responsive Design */
+@media (max-width: 1024px) {
+  .main-container.has-sidebar .content {
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .main-container {
     flex-direction: column;
@@ -50,5 +57,16 @@ body {
 
   .content {
     padding: 1rem;
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 0.75rem;
+  }
+  
+  .main-container {
+    padding-top: 70px; /* Adjust for smaller header */
   }
 }

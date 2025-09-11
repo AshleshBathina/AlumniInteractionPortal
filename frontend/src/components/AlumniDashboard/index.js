@@ -50,18 +50,19 @@ class AlumniDashboard extends Component {
     const { user } = this.props;
 
     if (isLoading) {
-      return <div className="loading-spinner"></div>;
+      return <div className="loading-spinner"><i className="fas fa-spinner fa-spin fa-2x"></i></div>;
     }
 
     return (
       <div className="alumni-dashboard">
+        <h2 style={{ marginTop: 0, marginBottom: '12px', color: '#1E88E5' }}>Alumni Dashboard</h2>
         <div className="dashboard-header">
           <h1>Welcome, {user.name}!</h1>
           <button
             className="post-job-button"
             onClick={() => history.push('/alumni/post-job')}
           >
-            Post New Job
+            <i className="fas fa-plus-circle"></i> Post New Job
           </button>
         </div>
 
@@ -72,7 +73,6 @@ class AlumniDashboard extends Component {
             <h3>Active Jobs</h3>
             <p className="stat-number">{jobs.length}</p>
           </div>
-          {/* Add more stat cards as needed */}
         </div>
 
         <h2 className="section-title">Your Job Postings</h2>
@@ -87,28 +87,28 @@ class AlumniDashboard extends Component {
                   <span className="company">{job.company}</span>
                 </div>
                 <div className="job-card-body">
-                  <p className="location">📍{job.location}</p>
-                  <p className="stipend">💰 {job.stipend}</p>
-                  <p className="applications-count">Applications: <strong>{job.applications_count}</strong></p>
+                  <p className="location"><i className="fas fa-map-marker-alt"></i> {job.location}</p>
+                  <p className="stipend"><i className="fas fa-dollar-sign"></i> {job.stipend}</p>
+                  <p className="applications-count"><i className="fas fa-users"></i> Applications: <strong>{job.applications_count}</strong></p>
                 </div>
                 <div className="job-card-footer">
                   <button
                     className="view-applications-button"
                     onClick={() => history.push(`/alumni/jobs/${job.id}/applications`)}
                   >
-                    View Applications
+                    <i className="fas fa-file-alt"></i> View
                   </button>
                   <button
                     className="edit-button"
                     onClick={() => history.push(`/alumni/jobs/${job.id}/edit`)}
                   >
-                    Edit
+                    <i className="fas fa-edit"></i> Edit
                   </button>
                   <button
                     className="delete-button"
                     onClick={() => this.deleteJob(job.id)}
                   >
-                    Delete
+                    <i className="fas fa-trash-alt"></i> Delete
                   </button>
                 </div>
               </div>

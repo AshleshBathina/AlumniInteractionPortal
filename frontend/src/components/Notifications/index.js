@@ -141,7 +141,15 @@ class Notifications extends Component {
                 <div className="notification-content">
                   <p className="notification-message">{notification.message}</p>
                   <span className="notification-time">
-                    {new Date(notification.created_at).toLocaleString()}
+                    {(() => {
+                      const iso = (notification.created_at || '').replace(' ', 'T') + 'Z';
+                      const dt = new Date(iso);
+                      return new Intl.DateTimeFormat('en-IN', {
+                        year: 'numeric', month: 'short', day: '2-digit',
+                        hour: '2-digit', minute: '2-digit', second: '2-digit',
+                        hour12: true, timeZone: 'Asia/Kolkata'
+                      }).format(dt);
+                    })()}
                   </span>
                 </div>
                 <div className="notification-actions">

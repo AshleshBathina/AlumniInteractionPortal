@@ -13,7 +13,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       isAuthenticated: false,
-      user: null
+      user: null,
+      isSidebarOpen: false
     };
   }
 
@@ -46,21 +47,40 @@ class App extends React.Component {
   handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.setState({ isAuthenticated: false, user: null });
+    this.setState({ isAuthenticated: false, user: null, isSidebarOpen: false });
+  };
+
+  toggleSidebar = () => {
+    this.setState(prevState => ({
+      isSidebarOpen: !prevState.isSidebarOpen
+    }));
+  };
+
+  closeSidebar = () => {
+    this.setState({ isSidebarOpen: false });
   };
 
   render() {
-    const { isAuthenticated, user } = this.state;
+    const { isAuthenticated, user, isSidebarOpen } = this.state;
 
     return (
       <HistoryRouter history={history}>
         <div className="app">
           {isAuthenticated && (
             <>
-              <Header user={user} onLogout={this.handleLogout} />
+              <Header 
+                user={user} 
+                onLogout={this.handleLogout}
+                onToggleSidebar={this.toggleSidebar}
+                isSidebarOpen={isSidebarOpen}
+              />
               <div className={`main-container ${user?.role === 'alumni' ? 'has-sidebar' : ''}`}>
                 {user?.role === 'alumni' && (
-                  <Sidebar userRole={user?.role} />
+                  <Sidebar 
+                    userRole={user?.role}
+                    isOpen={isSidebarOpen}
+                    onClose={this.closeSidebar}
+                  />
                 )}
                 <main className="content">
                   <AppRoutes 

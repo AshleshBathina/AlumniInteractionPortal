@@ -14,7 +14,7 @@
 }
 
 .dashboard-header h1 {
-  color: #333333;
+  color: #1E88E5;
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 1.5rem;
@@ -29,7 +29,7 @@
 .search-input {
   flex: 2;
   padding: 0.75rem 1rem;
-  border: 1px solid #F7F7F7;
+  border: 2px solid #F7F7F7;
   border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
@@ -72,7 +72,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
 }
 
 .job-card:hover {
@@ -85,7 +84,7 @@
 }
 
 .job-card-header h3 {
-  color: #333333;
+  color: #1E88E5;
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 0.25rem;
@@ -95,43 +94,45 @@
 }
 
 .company {
-  color: #4DB6AC;
+  color: #FF8A65;
   font-size: 14px;
   font-weight: 500;
 }
 
 .job-card-body {
   margin-bottom: 1.5rem;
-  overflow-wrap: anywhere;
 }
 
 .location, .stipend, .posted-by, .apply-by {
   color: #777777;
   font-size: 14px;
   margin-bottom: 0.5rem;
-}
-
-.posted-by {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+}
+
+.location i, .stipend i, .posted-by i, .apply-by i {
+  margin-right: 8px;
 }
 
 .job-card-footer {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .view-details-button, .apply-button {
   flex: 1;
-  padding: 0.75rem;
+  padding: 0.5rem 0.75rem;
   border: none;
   border-radius: 6px;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .view-details-button {
@@ -139,17 +140,26 @@
   color: #333333;
 }
 
+.view-details-button i {
+  margin-right: 6px;
+}
+
 .view-details-button:hover {
   background-color: #E0E0E0;
 }
 
 .apply-button {
-  background-color: #1F4E8C;
+  background: linear-gradient(135deg, #FFA726, #FF8A65);
   color: white;
 }
 
+.apply-button i {
+  margin-right: 6px;
+}
+
 .apply-button:hover {
-  background-color: #0D3C61;
+  background: linear-gradient(135deg, #FF8A65, #FFA726);
+  transform: translateY(-2px);
 }
 
 .no-jobs {
@@ -206,13 +216,30 @@
   75% { transform: translateX(5px); }
 }
 
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .student-dashboard {
+    padding: 1.5rem;
+  }
+  
+  .jobs-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .student-dashboard {
     padding: 1rem;
+    margin: 0.5rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 28px;
   }
 
   .search-filters {
     flex-direction: column;
+    gap: 0.75rem;
   }
 
   .search-input,
@@ -222,5 +249,97 @@
 
   .jobs-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .job-card {
+    padding: 1.25rem;
+  }
+  
+  .job-card-header h3 {
+    font-size: 16px;
+  }
+  
+  .job-card-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .view-details-button,
+  .apply-button {
+    padding: 0.6rem;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-dashboard {
+    padding: 0.75rem;
+    margin: 0.25rem;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+  
+  .search-filters {
+    gap: 0.5rem;
+  }
+  
+  .search-input,
+  .filter-select {
+    padding: 0.6rem 0.8rem;
+    font-size: 13px;
+  }
+  
+  .jobs-grid {
+    gap: 0.75rem;
+  }
+  
+  .job-card {
+    padding: 1rem;
+  }
+  
+  .job-card-header h3 {
+    font-size: 15px;
+  }
+  
+  .company {
+    font-size: 13px;
+  }
+  
+  .location, .stipend, .posted-by, .apply-by {
+    font-size: 12px;
+  }
+  
+  .view-details-button,
+  .apply-button {
+    padding: 0.5rem;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .student-dashboard {
+    padding: 0.5rem;
+    margin: 0.125rem;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 22px;
+  }
+  
+  .job-card {
+    padding: 0.75rem;
+  }
+  
+  .job-card-header h3 {
+    font-size: 14px;
+  }
+  
+  .view-details-button,
+  .apply-button {
+    padding: 0.4rem;
+    font-size: 11px;
   }
 }

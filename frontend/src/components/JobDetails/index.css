@@ -197,9 +197,30 @@
   }
 }
 
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .job-details {
+    padding: 1.5rem;
+  }
+  
+  .content-sections {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .job-details {
     padding: 1rem;
+    margin: 0.5rem;
+  }
+  
+  .job-header h1 {
+    font-size: 28px;
+  }
+  
+  .company {
+    font-size: 16px;
   }
 
   .job-header {
@@ -210,14 +231,183 @@
   .apply-button {
     margin: 1rem 0 0 0;
     width: 100%;
+    padding: 0.8rem 1.5rem;
+    font-size: 15px;
   }
 
   .content-sections {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .job-meta {
     flex-direction: column;
     gap: 0.5rem;
+  }
+  
+  .job-description {
+    padding: 1.5rem;
+  }
+  
+  .job-description h2 {
+    font-size: 22px;
+  }
+  
+  .description-content {
+    font-size: 15px;
+  }
+  
+  .alumni-info {
+    padding: 1.25rem;
+  }
+  
+  .alumni-info h3 {
+    font-size: 16px;
+  }
+  
+  .profile-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  
+  .alumni-name {
+    font-size: 15px;
+  }
+  
+  .posted-date {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .job-details {
+    padding: 0.75rem;
+    margin: 0.25rem;
+  }
+  
+  .job-header {
+    padding: 1.25rem;
+  }
+  
+  .job-header h1 {
+    font-size: 24px;
+  }
+  
+  .company {
+    font-size: 14px;
+  }
+  
+  .job-meta {
+    font-size: 13px;
+  }
+
+  .apply-button {
+    padding: 0.7rem 1.25rem;
+    font-size: 14px;
+  }
+  
+  .job-description {
+    padding: 1.25rem;
+  }
+  
+  .job-description h2 {
+    font-size: 20px;
+  }
+  
+  .description-content {
+    font-size: 14px;
+  }
+  
+  .alumni-info {
+    padding: 1rem;
+  }
+  
+  .alumni-info h3 {
+    font-size: 15px;
+  }
+  
+  .alumni-profile {
+    gap: 0.75rem;
+  }
+  
+  .profile-circle {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+  
+  .alumni-name {
+    font-size: 14px;
+  }
+  
+  .posted-date {
+    font-size: 12px;
+  }
+  
+  .deadline-notice {
+    padding: 0.75rem;
+  }
+  
+  .deadline-notice p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .job-details {
+    padding: 0.5rem;
+    margin: 0.125rem;
+  }
+  
+  .job-header {
+    padding: 1rem;
+  }
+  
+  .job-header h1 {
+    font-size: 22px;
+  }
+  
+  .company {
+    font-size: 13px;
+  }
+
+  .apply-button {
+    padding: 0.6rem 1rem;
+    font-size: 13px;
+  }
+  
+  .job-description {
+    padding: 1rem;
+  }
+  
+  .job-description h2 {
+    font-size: 18px;
+  }
+  
+  .description-content {
+    font-size: 13px;
+  }
+  
+  .alumni-info {
+    padding: 0.75rem;
+  }
+  
+  .alumni-info h3 {
+    font-size: 14px;
+  }
+  
+  .profile-circle {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+  
+  .alumni-name {
+    font-size: 13px;
+  }
+  
+  .posted-date {
+    font-size: 11px;
   }
 }

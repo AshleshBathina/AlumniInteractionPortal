@@ -164,13 +164,50 @@ h3 {
 }
 
 /* Responsive Design */
+/* Mobile First Approach */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .card {
+    margin: 0.25rem;
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  h2 {
+    font-size: 20px;
+  }
+  
+  h3 {
+    font-size: 18px;
+  }
+  
+  .button {
+    padding: 0.5rem 1rem;
+    font-size: 13px;
+  }
+  
+  .form-input {
+    padding: 0.5rem;
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
   
   .card {
     margin: 0.5rem;
+    padding: 1.25rem;
   }
   
   h1 {
@@ -178,6 +215,22 @@ h3 {
   }
   
   h2 {
-    font-size: 20px;
+    font-size: 22px;
+  }
+  
+  h3 {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
 }

@@ -235,27 +235,188 @@
   }
 }
 
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .profile {
+    padding: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .profile {
     padding: 1rem;
+    margin: 0.5rem;
   }
-
+  
   .profile-header {
     padding: 1.5rem;
+  }
+  
+  .profile-title h1 {
+    font-size: 28px;
+  }
+  
+  .profile-circle.large {
+    width: 70px;
+    height: 70px;
+    font-size: 28px;
   }
 
   .profile-info {
     flex-direction: column;
     text-align: center;
+    gap: 1rem;
   }
 
   .profile-form {
     padding: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+  
+  .form-group label {
+    font-size: 13px;
+  }
+  
+  .form-input {
+    padding: 0.6rem 0.8rem;
+    font-size: 13px;
+  }
+  
+  .save-button {
+    padding: 0.8rem;
+    font-size: 15px;
   }
 
   .info-item {
     flex-direction: column;
     gap: 0.25rem;
     text-align: center;
+  }
+  
+  .profile-section h2 {
+    font-size: 18px;
+  }
+  
+  .section-description {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile {
+    padding: 0.75rem;
+    margin: 0.25rem;
+  }
+  
+  .profile-header {
+    padding: 1.25rem;
+  }
+  
+  .profile-title h1 {
+    font-size: 24px;
+  }
+  
+  .profile-circle.large {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+  
+  .role-tag {
+    font-size: 12px;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .profile-form {
+    padding: 1.25rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    font-size: 12px;
+  }
+  
+  .form-input {
+    padding: 0.5rem 0.7rem;
+    font-size: 12px;
+  }
+  
+  .save-button {
+    padding: 0.7rem;
+    font-size: 14px;
+  }
+  
+  .profile-section {
+    padding: 1.25rem;
+  }
+  
+  .profile-section h2 {
+    font-size: 16px;
+  }
+  
+  .section-description {
+    font-size: 12px;
+  }
+  
+  .info-item {
+    padding: 0.6rem;
+  }
+  
+  .info-item .label,
+  .info-item .value {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .profile {
+    padding: 0.5rem;
+    margin: 0.125rem;
+  }
+  
+  .profile-header {
+    padding: 1rem;
+  }
+  
+  .profile-title h1 {
+    font-size: 22px;
+  }
+  
+  .profile-circle.large {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .profile-form {
+    padding: 1rem;
+  }
+  
+  .form-input {
+    padding: 0.4rem 0.6rem;
+    font-size: 11px;
+  }
+  
+  .save-button {
+    padding: 0.6rem;
+    font-size: 13px;
+  }
+  
+  .profile-section {
+    padding: 1rem;
+  }
+  
+  .profile-section h2 {
+    font-size: 15px;
+  }
+  
+  .section-description {
+    font-size: 11px;
   }
 }
