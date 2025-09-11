@@ -126,20 +126,22 @@
 
 .job-card-body {
   margin-bottom: 1.5rem;
+  color: #777777;
+  font-weight: 500;
 }
 
+/* Updated styles for applications-count, location, and stipend */
 .location, .stipend, .applications-count {
   color: #777777;
-  font-size: 14px;
+  font-size: 14px; /* reduced slightly */
   margin-bottom: 0.5rem;
+ /* increased weight */
 }
 
 .location i, .stipend i, .applications-count i {
   margin-right: 6px;
-}
-
-.applications-count {
-  font-weight: 500;
+  color: #777777;
+  font-weight: 700;
 }
 
 .applications-count strong {
@@ -161,6 +163,8 @@
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
+  color: #777777;
+  font-weight: 700;
   transition: background 0.3s ease;
   flex: 1;
   text-align: center;
@@ -263,7 +267,6 @@
   75% { transform: translateX(5px); }
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
   .jobs-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

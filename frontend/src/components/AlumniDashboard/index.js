@@ -55,7 +55,7 @@ class AlumniDashboard extends Component {
 
     return (
       <div className="alumni-dashboard">
-        <h2 style={{ marginTop: 0, marginBottom: '12px', color: '#1E88E5' }}>Alumni Dashboard</h2>
+        <h2 style={{ marginTop: 0, marginBottom: '12px', color: '#0D3C61' }}>Alumni Dashboard</h2>
         <div className="dashboard-header">
           <h1>Welcome, {user.name}!</h1>
           <button
